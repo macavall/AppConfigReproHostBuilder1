@@ -1,0 +1,4 @@
+local.settings.json
+.vs/
+bin/
+obj/
