@@ -53,7 +53,7 @@ namespace AppConfDurRepSim2
                 })
                 .ConfigureFunctionsWorkerDefaults(app =>
                 {
-                    app.UseAzureAppConfiguration();
+                    app.UseAzureAppConfiguration2();
                 })
 
                 .Build();
@@ -79,7 +79,7 @@ namespace AppConfDurRepSim2
         /// Configures a middleware for Azure App Configuration to use activity-based refresh for data configured in the provider.
         /// </summary>
         /// <param name="builder">An instance of <see cref="IFunctionsWorkerApplicationBuilder"/></param>
-        public static IFunctionsWorkerApplicationBuilder UseAzureAppConfiguration(this IFunctionsWorkerApplicationBuilder builder)
+        public static IFunctionsWorkerApplicationBuilder UseAzureAppConfiguration2(this IFunctionsWorkerApplicationBuilder builder)
         {
             IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
             IConfigurationRefresherProvider refresherProvider = serviceProvider.GetService<IConfigurationRefresherProvider>();
