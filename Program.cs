@@ -20,18 +20,6 @@ namespace AppConfDurRepSim2
         private static void Main(string[] args)
         {
             var host = new HostBuilder()
-                .ConfigureAppConfiguration(builder =>
-                {
-                    builder.AddAzureAppConfiguration(options =>
-                    {
-                        options.Connect(Environment.GetEnvironmentVariable("AZURE_APPCONFIG_CONNECTION_STRING"))
-                               .ConfigureRefresh(refreshOptions =>
-                               {
-                                   refreshOptions.Register("TestApp", refreshAll: true);
-                                   refreshOptions.SetRefreshInterval(TimeSpan.FromSeconds(1));
-                               });
-                    });
-                })
                 .ConfigureServices(s =>
                 {
                     s.AddAzureAppConfiguration();
@@ -49,6 +37,18 @@ namespace AppConfDurRepSim2
                         {
                             options.Rules.Remove(toRemove);
                         }
+                    });
+                })
+                .ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddAzureAppConfiguration(options =>
+                    {
+                        options.Connect(Environment.GetEnvironmentVariable("AZURE_APPCONFIG_CONNECTION_STRING"))
+                               .ConfigureRefresh(refreshOptions =>
+                               {
+                                   refreshOptions.Register("TestApp", refreshAll: true);
+                                   refreshOptions.SetRefreshInterval(TimeSpan.FromSeconds(1));
+                               });
                     });
                 })
                 .ConfigureFunctionsWorkerDefaults(app =>
